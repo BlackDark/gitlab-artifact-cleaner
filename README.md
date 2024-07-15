@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-python3 main3.py [-h] -s SERVER -t TOKEN [--ignore-expire] [--ignore-mr]
+python3 gitlab_artifact_cleaner.py [-h] -s SERVER -t TOKEN [--ignore-expire] [--ignore-mr]
                  (--group-id GROUP_ID | --project-id PROJECT_ID)
 ```
 
@@ -36,17 +36,17 @@ python3 main3.py [-h] -s SERVER -t TOKEN [--ignore-expire] [--ignore-mr]
 
 Clean up artifacts for a specific project:
 ```bash
-python3 main3.py -s https://mygitlab.com -t your_gitlab_token --project-id 123
+python3 gitlab_artifact_cleaner.py -s https://mygitlab.com -t your_gitlab_token --project-id 123
 ```
 
 Clean up artifacts for an entire group and its subgroups:
 ```bash
-python3 main3.py -s https://mygitlab.com -t your_gitlab_token --group-id 456
+python3 gitlab_artifact_cleaner.py -s https://mygitlab.com -t your_gitlab_token --group-id 456
 ```
 
 Clean up all artifacts, including non-expired ones:
 ```bash
-python3 main3.py -s https://mygitlab.com -t your_gitlab_token --group-id 456 --ignore-expire
+python3 gitlab_artifact_cleaner.py -s https://mygitlab.com -t your_gitlab_token --group-id 456 --ignore-expire
 ```
 
 ## Note
