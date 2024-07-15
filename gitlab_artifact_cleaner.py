@@ -9,12 +9,13 @@ import requests
 from dateutil import parser
 
 arg_parser = argparse.ArgumentParser(
-    prog="main3", description="Clean gitlab artifacts of groups or projects recursively"
+    prog="gitlab_artifact_cleaner",
+    description="Clean gitlab artifacts of groups or projects recursively",
 )
 arg_parser.add_argument(
     "-s",
     "--server",
-    help="Gitlab server address. Examples https://mygitlab.com",
+    help="Gitlab server address. Examples https://mygitlab.com.",
     required=True,
 )
 arg_parser.add_argument(
@@ -68,7 +69,7 @@ if ignore_mr:
 
 # Function to get all projects in a group, including subgroups
 def get_all_projects_in_group(group_id):
-    projects_url = f"https://{server}/api/v4/groups/{group_id}/projects?include_subgroups=true&per_page=500"
+    projects_url = f"{server}/api/v4/groups/{group_id}/projects?include_subgroups=true&per_page=500"
     response = requests.get(
         projects_url,
         headers={
@@ -94,7 +95,7 @@ overall_space_savings = 0
 for project_id in project_ids:
     print(f"Processing project {project_id}:")
 
-    merge_request_url = f"https://{server}/api/v4/projects/{project_id}/merge_requests?scope=all&per_page=100&page=1"
+    merge_request_url = f"{server}/api/v4/projects/{project_id}/merge_requests?scope=all&per_page=100&page=1"
     merge_requests = {}
     while merge_request_url:
         response = requests.get(
@@ -119,7 +120,9 @@ for project_id in project_ids:
 
         merge_request_url = response.links.get("next", {}).get("url", None)
 
-    branch_url = f"https://{server}/api/v4/projects/{project_id}/repository/branches?per_page=100&page=1"
+    branch_url = (
+        f"{server}/api/v4/projects/{project_id}/repository/branches?per_page=100&page=1"
+    )
     unmerged_branches = []
     while branch_url:
         response = requests.get(
@@ -144,7 +147,7 @@ for project_id in project_ids:
 
         branch_url = response.links.get("next", {}).get("url", None)
 
-    url = f"https://{server}/api/v4/projects/{project_id}/jobs?per_page=100&page=1"
+    url = f"{server}/api/v4/projects/{project_id}/jobs?per_page=100&page=1"
 
     job_count = 0
     artifact_count = 0
@@ -220,7 +223,7 @@ for project_id in project_ids:
                 job_id = job["id"]
                 print(f"Processing job ID: {job_id}", end="")
                 delete_response = requests.delete(
-                    f"https://{server}/api/v4/projects/{project_id}/jobs/{job_id}/artifacts",
+                    f"{server}/api/v4/projects/{project_id}/jobs/{job_id}/artifacts",
                     headers={
                         "private-token": token,
                     },
