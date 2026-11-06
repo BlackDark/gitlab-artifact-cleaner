@@ -59,7 +59,7 @@ arg_project = args.project_id
 ignore_expiry = args.ignore_expire
 ignore_mr = args.ignore_mr
 
-now = datetime.now(timezone.utc)
+now = datetime.now(timezone.utc)  # noqa: UP017  # datetime.UTC needs Python 3.11; lint matrix includes 3.10
 
 if ignore_expiry:
     print("Executed with ignoring expiry date.")
