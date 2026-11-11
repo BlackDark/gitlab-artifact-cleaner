@@ -10,7 +10,7 @@ This Python script is designed to clean up artifacts in GitLab instances, either
 
 ## Requirements
 
-To run this script, you need Python 3 installed on your system. The required dependencies are listed in the `requirements.txt` file. You can install them using pip:
+To run this script, you need Python 3.11 or newer installed on your system. The required dependencies are listed in the `requirements.txt` file. You can install them using pip:
 
 ```bash
 pip install -r requirements.txt
