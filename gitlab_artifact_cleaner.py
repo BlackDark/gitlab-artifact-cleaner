@@ -3,7 +3,7 @@
 import argparse
 import re
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import requests
 from dateutil import parser
@@ -59,7 +59,7 @@ arg_project = args.project_id
 ignore_expiry = args.ignore_expire
 ignore_mr = args.ignore_mr
 
-now = datetime.now(timezone.utc)  # noqa: UP017  # datetime.UTC needs Python 3.11; lint matrix includes 3.10
+now = datetime.now(UTC)
 
 if ignore_expiry:
     print("Executed with ignoring expiry date.")
