@@ -1,0 +1,12 @@
+[tools]
+python = "3.12.16"
+uv = "0.13.8"
+
+[tasks.check]
+description = "Install requirements, Ruff, and isort checks"
+run = '''
+uv venv --clear --python "$(command -v python)"
+uv pip install --python .venv/bin/python -r requirements.txt -r requirements.dev.txt
+.venv/bin/ruff check .
+.venv/bin/isort . --check-only
+'''
